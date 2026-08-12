@@ -1,0 +1,25 @@
+name = "nexorum-blockchain-engine"
+main = "src/worker.ts"
+compatibility_date = "2025-01-01"
+
+# Собранный фронтенд (npm run build → dist/). Без этого блока воркер отдаёт
+# только API — на "/" будет открываться пустая заглушка, а не сам сайт.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "nexorum-db"
+database_id = "YOUR_D1_DATABASE_ID_HERE"
+
+# Environment variables (non-secret)
+[vars]
+NODE_ENV = "production"
+
+# Secrets (set via: wrangler secret put KEY_NAME)
+# GEMINI_API_KEY
+# ETHEREUM_RPC_KEY
+# SOLANA_RPC_KEY
