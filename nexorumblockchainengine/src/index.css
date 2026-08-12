@@ -1,0 +1,50 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-nexorum-900: #0a0a0f;
+  --color-nexorum-800: #12121a;
+  --color-nexorum-700: #1a1a2e;
+  --color-nexorum-600: #252540;
+  --color-nexorum-accent: #00d4ff;
+  --color-nexorum-accent-dim: #00d4ff33;
+  --color-nexorum-success: #00ff88;
+  --color-nexorum-warning: #ffaa00;
+  --color-nexorum-danger: #ff3366;
+}
+
+html, body, #root {
+  height: 100%;
+  background-color: var(--color-nexorum-900);
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-nexorum-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-nexorum-600);
+  border-radius: 3px;
+}
+
+.glass-panel {
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
