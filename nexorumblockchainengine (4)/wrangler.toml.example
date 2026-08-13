@@ -1,0 +1,32 @@
+name = "nexorum-blockchain-engine"
+main = "src/worker.ts"
+compatibility_date = "2025-01-01"
+
+# Собранный фронтенд (npm run build → dist/). Без этого блока воркер отдаёт
+# только API — на "/" будет открываться пустая заглушка, а не сам сайт.
+#
+# run_worker_first обязателен для /api/* — иначе Cloudflare по умолчанию
+# сначала пытается отдать статику и, если файл не найден, СРАЗУ отдаёт
+# index.html (single-page-application fallback) — даже для /api/v1/health,
+# вообще не вызывая src/worker.ts. Из-за этого API возвращал HTML вместо
+# JSON ("Unexpected token '<' ... not valid JSON" в консоли браузера).
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "nexorum-db"
+database_id = "YOUR_D1_DATABASE_ID_HERE"
+
+# Environment variables (non-secret)
+[vars]
+NODE_ENV = "production"
+
+# Secrets (set via: wrangler secret put KEY_NAME)
+# GEMINI_API_KEY
+# ETHEREUM_RPC_KEY
+# SOLANA_RPC_KEY
